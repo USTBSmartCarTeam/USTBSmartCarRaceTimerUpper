@@ -3,16 +3,15 @@
 from copy import deepcopy
 
 import pandas as pd
-from PyQt6.QtCore import QSize, pyqtSignal
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QDialog, \
-    QMessageBox, QFileDialog, QSpinBox, QScrollArea, QHBoxLayout, \
-    QSpacerItem, QSizePolicy, QGridLayout, QToolButton
+from PySide6.QtCore import QSize, Signal
+from PySide6.QtWidgets import (QWidget, QVBoxLayout, QDialog, QMessageBox, QFileDialog, QSpinBox, QScrollArea,
+                               QHBoxLayout, QSpacerItem, QSizePolicy, QGridLayout, QToolButton)
 
 from widget.common import *
 
 
 class PenaltySettingDialog(QDialog):
-    setting_saved = pyqtSignal()
+    setting_saved = Signal()
 
     def __init__(self, configuration):
         super().__init__()

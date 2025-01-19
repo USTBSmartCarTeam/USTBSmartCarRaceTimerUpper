@@ -2,8 +2,8 @@ import json
 import os
 
 import chardet
-from PyQt6.QtGui import QGuiApplication, QAction
-from PyQt6.QtWidgets import QMainWindow, QMenu, QApplication
+from PySide6.QtGui import QGuiApplication, QAction
+from PySide6.QtWidgets import QMainWindow, QMenu, QApplication
 from openpyxl import Workbook
 
 from task_thread import *
@@ -14,7 +14,7 @@ from widget.screen import *
 class Console(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("北京科技大学智能汽车竞赛计时器控制台")
+        self.setWindowTitle("北京科技大学智能汽车竞赛计时器控制台 V2.0")
         self.setGeometry(100, 100, 900, 600)
         self.full_screen_window = None
         self.communication_thread = {
@@ -504,7 +504,7 @@ class Console(QMainWindow):
 
         if 0 <= screen_index < len(screens):
             # 将全屏窗口移到指定的屏幕并显示全屏
-            target_screen = screens[screen_index]
+            target_screen = screens[screen_index - 1]
             self.full_screen_window.setGeometry(target_screen.geometry())
             self.full_screen_window.showFullScreen()
 
@@ -513,7 +513,14 @@ class Console(QMainWindow):
             self.update_timer_display()
 
     def show_about(self):
-        QMessageBox.about(self, "关于", f"北京科技大学智能汽车竞赛计时器 v1.0\n\n作者：谢翔远\n时间：2024年11月30日\n\n致敬完全模型最后的光辉")
+        QMessageBox.about(self, "关于","""
+                                            <div style='text-align: center;'>
+                                            <h2>北京科技大学智能汽车竞赛计时器</h2>
+                                            <p>作者：谢翔远</p>
+                                            <p>日期：2025年1月18日</p>
+                                            <p>版本：V2.0</p>
+                                            <p><i>轮到你，为世界加速！</i></p>
+                                            """)
 
     def update_team_information(self):
         progress = self.race_data["比赛进度"]
@@ -698,12 +705,14 @@ class Console(QMainWindow):
             # 获取所有项的索引并设置居中
             for i in range(self.record_option_display.count()):
                 index = self.record_option_display.model().index(i, 0)
-                self.record_option_display.model().setData(index, Qt.AlignmentFlag.AlignCenter,
+                self.record_option_display.model().setData(index,
+                                                           Qt.AlignmentFlag.AlignCenter,
                                                            Qt.ItemDataRole.TextAlignmentRole)
         else:
             self.record_option_display.addItem("暂无成绩")
             index = self.record_option_display.model().index(0, 0)
-            self.record_option_display.model().setData(index, Qt.AlignmentFlag.AlignCenter,
+            self.record_option_display.model().setData(index,
+                                                       Qt.AlignmentFlag.AlignCenter,
                                                        Qt.ItemDataRole.TextAlignmentRole)
 
     def update_record_state(self, text):
@@ -723,10 +732,7 @@ class Console(QMainWindow):
         self.update_record_option()
 
         # 更新最好成绩
-        best_record = min(
-            (data["修正时间"] for data in team_data["所有成绩"] if data["状态"] == "已确认"),
-            default=999.999
-        )
+        best_record = min((data["修正时间"] for data in team_data["所有成绩"] if data["状态"] == "已确认"), default=999.999)
 
         # 更新最好成绩显示
         team_data["最好成绩"] = best_record
@@ -813,8 +819,7 @@ class Console(QMainWindow):
         # 获取当前成绩的罚时列表
         progress = self.race_data["比赛进度"]
         try:
-            penalties = self.race_data["队伍名单"][progress]["所有成绩"][self.record_option_display.currentIndex()][
-                "罚时"]
+            penalties = self.race_data["队伍名单"][progress]["所有成绩"][self.record_option_display.currentIndex()]["罚时"]
         except Exception:
             return
 

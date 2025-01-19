@@ -1,14 +1,13 @@
 """ 手动添加成绩对话窗口 """
 
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtWidgets import QVBoxLayout, QDialog, \
-    QFormLayout
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import QVBoxLayout, QDialog, QFormLayout
 
 from widget.common import *
 
 
 class AddRecordDialog(QDialog):
-    setting_saved = pyqtSignal()
+    setting_saved = Signal()
 
     def __init__(self, team):
         super().__init__()

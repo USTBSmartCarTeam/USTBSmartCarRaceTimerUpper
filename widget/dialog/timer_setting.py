@@ -1,7 +1,6 @@
 """ 计时设置对话窗口 """
 
-from PyQt6.QtWidgets import QVBoxLayout, QDialog, \
-    QMessageBox, QFormLayout, QSpinBox, QCheckBox
+from PySide6.QtWidgets import QVBoxLayout, QDialog, QMessageBox, QFormLayout, QSpinBox, QCheckBox
 
 from widget.common import *
 

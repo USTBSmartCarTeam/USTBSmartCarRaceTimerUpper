@@ -1,13 +1,12 @@
 """ 调整剩余时间对话窗口 """
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtWidgets import QVBoxLayout, QDialog, \
-    QFormLayout, QSpinBox
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import QVBoxLayout, QDialog, QFormLayout, QSpinBox
 
 from widget.common import *
 
 
 class ModifyTimeDialog(QDialog):
-    setting_saved = pyqtSignal()
+    setting_saved = Signal()
 
     def __init__(self, team):
         super().__init__()

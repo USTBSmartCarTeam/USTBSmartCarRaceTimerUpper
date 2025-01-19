@@ -1,5 +1,5 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QLabel, QPushButton, QDoubleSpinBox, QLineEdit, QComboBox
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QLabel, QPushButton, QDoubleSpinBox, QLineEdit, QComboBox
 
 
 def create_label(text="", alignment=Qt.AlignmentFlag.AlignCenter, font=None, style=None):

@@ -5,20 +5,19 @@ import socket
 
 import psutil
 import serial.tools.list_ports
-from PyQt6.QtCore import QTimer, pyqtSignal
-from PyQt6.QtGui import QTextOption
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QDialog, \
-    QMessageBox, QGridLayout, QTextEdit, QTabWidget, QScrollArea
+from PySide6.QtCore import QTimer, Signal
+from PySide6.QtGui import QTextOption
+from PySide6.QtWidgets import QVBoxLayout, QDialog, QMessageBox, QGridLayout, QTextEdit, QTabWidget, QScrollArea
 
 from widget.common import *
 from widget.round_indicator import *
 
 
 class CommunicationSettingDialog(QDialog):
-    serial_port_state_changed = pyqtSignal(tuple)
-    tcp_server_state_changed = pyqtSignal(tuple)
-    udp_server_state_changed = pyqtSignal(tuple)
-    send_status = pyqtSignal(str)
+    serial_port_state_changed = Signal(tuple)
+    tcp_server_state_changed = Signal(tuple)
+    udp_server_state_changed = Signal(tuple)
+    send_status = Signal(str)
 
     def __init__(self, configuration, communication_thread):
         super().__init__()

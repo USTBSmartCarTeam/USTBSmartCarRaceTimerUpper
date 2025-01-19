@@ -2,7 +2,7 @@ import re
 import socket
 
 import serial
-from PyQt6.QtCore import QThread, pyqtSignal
+from PySide6.QtCore import QThread, Signal
 
 
 def parse_data(data, pattern_callbacks):
@@ -21,11 +21,11 @@ def parse_data(data, pattern_callbacks):
 
 
 class SerialPortThread(QThread):
-    real_received = pyqtSignal(float)
-    final_received = pyqtSignal(float)
-    timer_reset = pyqtSignal()
-    send_status = pyqtSignal(str)
-    message_received = pyqtSignal(str)
+    real_received = Signal(float)
+    final_received = Signal(float)
+    timer_reset = Signal()
+    send_status = Signal(str)
+    message_received = Signal(str)
 
     def __init__(self, port, baudrate):
         super().__init__()
@@ -72,10 +72,10 @@ class SerialPortThread(QThread):
 
 
 class TcpServerThread(QThread):
-    real_received = pyqtSignal(float)
-    final_received = pyqtSignal(float)
-    timer_reset = pyqtSignal()
-    send_status = pyqtSignal(str)
+    real_received = Signal(float)
+    final_received = Signal(float)
+    timer_reset = Signal()
+    send_status = Signal(str)
 
     def __init__(self, host='0.0.0.0', port=32767):
         super().__init__()
@@ -125,10 +125,10 @@ class TcpServerThread(QThread):
 
 
 class UdpServerThread(QThread):
-    real_received = pyqtSignal(float)
-    final_received = pyqtSignal(float)
-    timer_reset = pyqtSignal()
-    send_status = pyqtSignal(str)
+    real_received = Signal(float)
+    final_received = Signal(float)
+    timer_reset = Signal()
+    send_status = Signal(str)
 
     def __init__(self, host='0.0.0.0', port=32767):
         super().__init__()
